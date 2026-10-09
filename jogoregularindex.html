@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz - Medicina do Futuro</title>
+
+<style>
+
+:root {
+    --bondi: #0991B2;
+    --celeste: #A8DCD6;
+    --maya: #7BC1EB;
+    --francia: #2F8ADA;
+
+    --azul-escuro: #073B4C;
+
+    --branco: #FFFFFF;
+
+    --verde: #20B879;
+    --vermelho: #E85D75;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    color: var(--azul-escuro);
+
+    background:
+
+        radial-gradient(
+            circle at top left,
+            var(--celeste),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at bottom right,
+            var(--maya),
+            transparent 40%
+        ),
+
+        linear-gradient(
+            135deg,
+            var(--bondi),
+            var(--francia)
+        );
+}
+
+
+/* FUNDO */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.15);
+
+    top: -80px;
+    right: -70px;
+
+    filter: blur(5px);
+}
+
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.12);
+
+    bottom: -60px;
+    left: -50px;
+}
+
+
+/* CONTAINER */
+
+.game {
+
+    width: 100%;
+
+    max-width: 780px;
+
+    min-height: 550px;
+
+    background: rgba(255,255,255,0.90);
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.5);
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 70px rgba(0,40,60,0.30);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* CABEÇALHO */
+
+.top {
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--bondi),
+            var(--francia)
+        );
+
+    color: white;
+
+    padding: 28px 25px;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.top::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    top: -110px;
+    left: -50px;
+}
+
+.top::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 140px;
+    height: 140px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    bottom: -90px;
+    right: -30px;
+}
+
+.logo {
+
+    font-size: 45px;
+
+    margin-bottom: 8px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.top h1 {
+
+    font-size: clamp(25px, 5vw, 38px);
+
+    margin-bottom: 8px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.top p {
+
+    font-size: 14px;
+
+    opacity: .92;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* TELAS */
+
+.screen {
+
+    padding: 35px;
+
+    animation: aparecer .5s ease;
+}
+
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* TELA INICIAL */
+
+.start {
+
+    text-align: center;
+}
+
+.start-icon {
+
+    width: 105px;
+    height: 105px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 52px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--celeste),
+            var(--maya)
+        );
+
+    box-shadow:
+        0 12px 30px rgba(9,145,178,0.20);
+
+    animation: flutuar 3s ease-in-out infinite;
+}
+
+
+@keyframes flutuar {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+
+.start h2 {
+
+    color: var(--bondi);
+
+    font-size: clamp(25px, 5vw, 34px);
+
+    margin-bottom: 12px;
+}
+
+.start .subtitle {
+
+    color: #55717A;
+
+    max-width: 560px;
+
+    margin: 0 auto 25px;
+
+    line-height: 1.7;
+}
+
+
+/* CARDS */
+
+.info-cards {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin: 25px auto;
+
+    max-width: 600px;
+}
+
+
+.info-card {
+
+    padding: 16px 10px;
+
+    border-radius: 17px;
+
+    background: rgba(168,220,214,0.35);
+
+    border: 1px solid rgba(9,145,178,0.12);
+}
+
+
+.info-card .icon {
+
+    font-size: 25px;
+
+    margin-bottom: 7px;
+}
+
+
+.info-card span {
+
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: var(--azul-escuro);
+}
+
+
+/* BOTÃO */
+
+.main-button {
+
+    border: none;
+
+    padding: 16px 32px;
+
+    border-radius: 16px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--bondi),
+            var(--francia)
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(47,138,218,0.30);
+
+    transition: .25s;
+}
+
+
+.main-button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 30px rgba(47,138,218,0.40);
+}
+
+
+.main-button:active {
+
+    transform: scale(.97);
+}
+
+
+/* CABEÇALHO DO QUIZ */
+
+.quiz-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+}
+
+
+.question-number {
+
+    color: var(--bondi);
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+
+.score-box {
+
+    background: var(--celeste);
+
+    color: var(--azul-escuro);
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* PROGRESSO */
+
+.progress-background {
+
+    width: 100%;
+
+    height: 9px;
+
+    background: #DCEFF0;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 30px;
+}
+
+
+.progress {
+
+    height: 100%;
+
+    width: 0%;
+
+    border-radius: 20px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--bondi),
+            var(--francia)
+        );
+
+    transition: width .5s ease;
+}
+
+
+/* PERGUNTA */
+
+.question-card {
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(168,220,214,0.25),
+            rgba(123,193,235,0.20)
+        );
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    margin-bottom: 22px;
+
+    border: 1px solid rgba(9,145,178,0.10);
+}
+
+
+.question {
+
+    font-size: clamp(21px, 4vw, 29px);
+
+    line-height: 1.35;
+
+    color: var(--azul-escuro);
+}
+
+
+/* ALTERNATIVAS */
+
+.answers {
+
+    display: grid;
+
+    gap: 12px;
+}
+
+
+.answer {
+
+    width: 100%;
+
+    padding: 17px;
+
+    border-radius: 17px;
+
+    border: 2px solid transparent;
+
+    background: white;
+
+    color: var(--azul-escuro);
+
+    text-align: left;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(20,80,100,0.07);
+
+    transition: .25s;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.answer:hover:not(:disabled) {
+
+    transform: translateX(5px);
+
+    border-color: var(--bondi);
+
+    background: #F3FCFD;
+}
+
+
+.answer-letter {
+
+    min-width: 34px;
+
+    height: 34px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--maya);
+
+    color: white;
+
+    font-weight: bold;
+}
+
+
+.answer.correct {
+
+    background: rgba(32,184,121,0.13);
+
+    border-color: var(--verde);
+
+    color: #13784F;
+}
+
+
+.answer.correct .answer-letter {
+
+    background: var(--verde);
+}
+
+
+.answer.wrong {
+
+    background: rgba(232,93,117,0.12);
+
+    border-color: var(--vermelho);
+
+    color: #B93650;
+}
+
+
+.answer.wrong .answer-letter {
+
+    background: var(--vermelho);
+}
+
+
+.answer:disabled {
+
+    cursor: default;
+}
+
+
+/* FEEDBACK */
+
+.feedback {
+
+    min-height: 28px;
+
+    margin-top: 17px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 15px;
+}
+
+
+/* PRÓXIMA */
+
+.next-container {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 12px;
+}
+
+
+.next-button {
+
+    border: none;
+
+    padding: 13px 22px;
+
+    border-radius: 13px;
+
+    background: var(--francia);
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.next-button:hover {
+
+    transform: translateY(-2px);
+
+    background: var(--bondi);
+}
+
+
+/* RESULTADO */
+
+.result {
+
+    text-align: center;
+}
+
+
+.result-icon {
+
+    font-size: 65px;
+
+    margin-bottom: 10px;
+}
+
+
+.result h2 {
+
+    color: var(--bondi);
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+}
+
+
+.result-subtitle {
+
+    color: #607B82;
+}
+
+
+.score-circle {
+
+    width: 150px;
+    height: 150px;
+
+    margin: 25px auto;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--celeste),
+            var(--maya)
+        );
+
+    border: 8px solid white;
+
+    box-shadow:
+        0 12px 35px rgba(9,145,178,0.20);
+}
+
+
+.score-number {
+
+    font-size: 42px;
+
+    font-weight: bold;
+
+    color: var(--bondi);
+}
+
+
+.score-label {
+
+    font-size: 12px;
+
+    color: var(--azul-escuro);
+}
+
+
+.final-message {
+
+    max-width: 550px;
+
+    margin: 0 auto 25px;
+
+    line-height: 1.6;
+
+    color: #55717A;
+}
+
+
+/* RODAPÉ */
+
+.footer {
+
+    text-align: center;
+
+    padding: 14px;
+
+    background: rgba(168,220,214,0.35);
+
+    color: #41636C;
+
+    font-size: 11px;
+}
+
+
+/* ESCONDER */
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 10px;
+
+        align-items: flex-start;
+
+        padding-top: 15px;
+    }
+
+
+    .game {
+
+        border-radius: 24px;
+    }
+
+
+    .screen {
+
+        padding: 23px 16px;
+    }
+
+
+    .top {
+
+        padding: 22px 15px;
+    }
+
+
+    .logo {
+
+        font-size: 38px;
+    }
+
+
+    .info-cards {
+
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+
+    .info-card {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 11px;
+    }
+
+
+    .info-card .icon {
+
+        margin: 0;
+    }
+
+
+    .answer {
+
+        padding: 14px;
+
+        font-size: 14px;
+    }
+
+
+    .question-card {
+
+        padding: 19px;
+    }
+
+
+    .quiz-top {
+
+        font-size: 13px;
+    }
+
+
+    .score-circle {
+
+        width: 135px;
+
+        height: 135px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="game">
+
+
+<!-- CABEÇALHO -->
+
+<header class="top">
+
+    <div class="logo">
+        🧬
+    </div>
+
+    <h1>
+        Medicina do Futuro
+    </h1>
+
+    <p>
+        Tecnologias Avançadas e a Medicina do Futuro
+    </p>
+
+</header>
+
+
+
+<!-- TELA INICIAL -->
+
+<section
+    id="startScreen"
+    class="screen start">
+
+
+    <div class="start-icon">
+        🤖
+    </div>
+
+
+    <h2>
+        Quiz da Medicina do Futuro
+    </h2>
+
+
+    <p class="subtitle">
+
+        Descubra quanto você sabe sobre as
+        tecnologias que estão transformando
+        a medicina.
+
+    </p>
+
+
+    <div class="info-cards">
+
+
+        <div class="info-card">
+
+            <div class="icon">
+                🤖
+            </div>
+
+            <span>
+                Robôs
+            </span>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="icon">
+                🧠
+            </div>
+
+            <span>
+                Inteligência Artificial
+            </span>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="icon">
+                🧬
+            </div>
+
+            <span>
+                Biotecnologia
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <button
+        class="main-button"
+        onclick="startQuiz()">
+
+        COMEÇAR QUIZ 🚀
+
+    </button>
+
+
+</section>
+
+
+
+<!-- QUIZ -->
+
+<section
+    id="quizScreen"
+    class="screen hidden">
+
+
+    <div class="quiz-top">
+
+
+        <span
+            id="questionNumber"
+            class="question-number">
+
+            Pergunta 1 de 10
+
+        </span>
+
+
+        <span
+            id="scoreText"
+            class="score-box">
+
+            ⭐ 0 pontos
+
+        </span>
+
+
+    </div>
+
+
+    <div class="progress-background">
+
+        <div
+            id="progress"
+            class="progress">
+
+        </div>
+
+    </div>
+
+
+    <div class="question-card">
+
+        <h2
+            id="question"
+            class="question">
+
+        </h2>
+
+    </div>
+
+
+    <div
+        id="answers"
+        class="answers">
+
+    </div>
+
+
+    <div
+        id="feedback"
+        class="feedback">
+
+    </div>
+
+
+    <div class="next-container">
+
+        <button
+            id="nextBtn"
+            class="next-button hidden"
+            onclick="nextQuestion()">
+
+            Próxima pergunta →
+
+        </button>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- RESULTADO -->
+
+<section
+    id="resultScreen"
+    class="screen result hidden">
+
+
+    <div class="result-icon">
+        🏆
+    </div>
+
+
+    <h2>
+        Quiz concluído!
+    </h2>
+
+
+    <p class="result-subtitle">
+        Seu resultado foi:
+    </p>
+
+
+    <div class="score-circle">
+
+
+        <div
+            id="finalScore"
+            class="score-number">
+
+            0/10
+
+        </div>
+
+
+        <div class="score-label">
+            ACERTOS
+        </div>
+
+
+    </div>
+
+
+    <p
+        id="finalMessage"
+        class="final-message">
+
+    </p>
+
+
+    <button
+        class="main-button"
+        onclick="restartQuiz()">
+
+        🔄 JOGAR NOVAMENTE
+
+    </button>
+
+
+</section>
+
+
+
+<div class="footer">
+
+    Tecnologias Avançadas e a Medicina do Futuro
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   PERGUNTAS E ALTERNATIVAS
+========================================= */
+
+const questions = [
+
+
+    {
+        question: "Robôs cirúrgicos já existem?",
+
+        answers: [
+            "Somente em pesquisas.",
+            "Sim.",
+            "Não.",
+            "Ainda não."
+        ],
+
+        correct: 1
+    },
+
+
+    {
+        question: "Para que servem os robôs cirúrgicos?",
+
+        answers: [
+            "Para fabricar medicamentos.",
+            "Para fazer exames de sangue.",
+            "Para substituir todos os médicos.",
+            "Para ajudar nas cirurgias."
+        ],
+
+        correct: 3
+    },
+
+
+    {
+        question: "O que a IA pode ajudar a detectar?",
+
+        answers: [
+            "Doenças.",
+            "Somente fraturas.",
+            "Apenas alergias.",
+            "Somente problemas de visão."
+        ],
+
+        correct: 0
+    },
+
+
+    {
+        question: "A impressão 3D já é usada na medicina?",
+
+        answers: [
+            "Não.",
+            "Ainda está proibida.",
+            "Sim.",
+            "Somente em hospitais veterinários."
+        ],
+
+        correct: 2
+    },
+
+
+    {
+        question: "O que os exoesqueletos ajudam?",
+
+        answers: [
+            "Na fabricação de vacinas.",
+            "Nos movimentos.",
+            "Na produção de medicamentos.",
+            "Na realização de exames."
+        ],
+
+        correct: 1
+    },
+
+
+    {
+        question: "Os nanorrobôs já são comuns na medicina?",
+
+        answers: [
+            "Sim.",
+            "São usados em todos os hospitais.",
+            "Somente em cirurgias.",
+            "Não."
+        ],
+
+        correct: 3
+    },
+
+
+    {
+        question: "O que os nanorrobôs podem levar pelo corpo?",
+
+        answers: [
+            "Medicamentos.",
+            "Alimentos.",
+            "Água.",
+            "Oxigênio em garrafas."
+        ],
+
+        correct: 0
+    },
+
+
+    {
+        question: "O que as bioimpressoras 3D podem produzir?",
+
+        answers: [
+            "Somente computadores.",
+            "Somente medicamentos líquidos.",
+            "Próteses e implantes.",
+            "Apenas roupas."
+        ],
+
+        correct: 2
+    },
+
+
+    {
+        question: "Qual tecnologia ajuda no diagnóstico?",
+
+        answers: [
+            "Exoesqueleto.",
+            "Inteligência Artificial.",
+            "Impressora comum.",
+            "Robô de limpeza."
+        ],
+
+        correct: 1
+    },
+
+
+    {
+        question: "Como serão os exoesqueletos no futuro?",
+
+        answers: [
+            "Mais pesados e maiores.",
+            "Sem tecnologia.",
+            "Feitos somente para esportes.",
+            "Mais leves e inteligentes."
+        ],
+
+        correct: 3
+    }
+
+];
+
+
+
+/* =========================================
+   VARIÁVEIS
+========================================= */
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let answered = false;
+
+
+
+/* =========================================
+   COMEÇAR
+========================================= */
+
+function startQuiz() {
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    answered = false;
+
+
+    document
+        .getElementById("startScreen")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("resultScreen")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("quizScreen")
+        .classList
+        .remove("hidden");
+
+
+    showQuestion();
+
+}
+
+
+
+/* =========================================
+   MOSTRAR PERGUNTA
+========================================= */
+
+function showQuestion() {
+
+    answered = false;
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    document
+        .getElementById("questionNumber")
+        .textContent =
+
+        `Pergunta ${currentQuestion + 1} de ${questions.length}`;
+
+
+    document
+        .getElementById("scoreText")
+        .textContent =
+
+        `⭐ ${score} pontos`;
+
+
+    document
+        .getElementById("progress")
+        .style
+        .width =
+
+        `${((currentQuestion) / questions.length) * 100}%`;
+
+
+    document
+        .getElementById("question")
+        .textContent =
+
+        q.question;
+
+
+    const answersContainer =
+        document.getElementById("answers");
+
+
+    answersContainer.innerHTML = "";
+
+
+    document
+        .getElementById("feedback")
+        .textContent = "";
+
+
+    document
+        .getElementById("nextBtn")
+        .classList
+        .add("hidden");
+
+
+
+    q.answers.forEach(
+
+        (answer, index) => {
+
+
+            const button =
+                document.createElement("button");
+
+
+            button.className =
+                "answer";
+
+
+            const letter =
+                document.createElement("span");
+
+
+            letter.className =
+                "answer-letter";
+
+
+            letter.textContent =
+                String.fromCharCode(65 + index);
+
+
+            const text =
+                document.createElement("span");
+
+
+            text.textContent =
+                answer;
+
+
+            button.appendChild(letter);
+
+            button.appendChild(text);
+
+
+            button.onclick = () =>
+
+                selectAnswer(
+                    index,
+                    button
+                );
+
+
+            answersContainer
+                .appendChild(button);
+
+        }
+
+    );
+
+}
+
+
+
+/* =========================================
+   ESCOLHER RESPOSTA
+========================================= */
+
+function selectAnswer(
+    selected,
+    selectedButton
+) {
+
+    if (answered)
+        return;
+
+
+    answered = true;
+
+
+    const q =
+        questions[currentQuestion];
+
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+
+    buttons.forEach(
+
+        (button, index) => {
+
+
+            button.disabled = true;
+
+
+            if (
+                index === q.correct
+            ) {
+
+                button.classList
+                    .add("correct");
+
+            }
+
+        }
+
+    );
+
+
+    if (
+        selected === q.correct
+    ) {
+
+
+        score++;
+
+
+        selectedButton.classList
+            .add("correct");
+
+
+        document
+            .getElementById("feedback")
+            .textContent =
+
+            "✓ Muito bem! Resposta correta!";
+
+
+        document
+            .getElementById("feedback")
+            .style
+            .color =
+
+            "var(--verde)";
+
+
+    }
+
+    else {
+
+
+        selectedButton.classList
+            .add("wrong");
+
+
+        document
+            .getElementById("feedback")
+            .textContent =
+
+            `✕ Resposta incorreta! A correta é: ${q.answers[q.correct]}`;
+
+
+        document
+            .getElementById("feedback")
+            .style
+            .color =
+
+            "var(--vermelho)";
+
+    }
+
+
+    document
+        .getElementById("scoreText")
+        .textContent =
+
+        `⭐ ${score} pontos`;
+
+
+    document
+        .getElementById("nextBtn")
+        .classList
+        .remove("hidden");
+
+}
+
+
+
+/* =========================================
+   PRÓXIMA
+========================================= */
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion <
+        questions.length
+    ) {
+
+        showQuestion();
+
+    }
+
+    else {
+
+        finishQuiz();
+
+    }
+
+}
+
+
+
+/* =========================================
+   FINAL
+========================================= */
+
+function finishQuiz() {
+
+    document
+        .getElementById("quizScreen")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("resultScreen")
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById("finalScore")
+        .textContent =
+
+        `${score}/${questions.length}`;
+
+
+    const message =
+        document.getElementById("finalMessage");
+
+
+    if (score === 10) {
+
+        message.textContent =
+
+        "🌟 Excelente! Você acertou todas as perguntas sobre a medicina do futuro!";
+
+    }
+
+    else if (score >= 7) {
+
+        message.textContent =
+
+        "🚀 Muito bem! Você mostrou que conhece bastante sobre as tecnologias que estão transformando a medicina.";
+
+    }
+
+    else if (score >= 5) {
+
+        message.textContent =
+
+        "🧬 Bom trabalho! Você já conhece várias tecnologias da medicina do futuro.";
+
+    }
+
+    else {
+
+        message.textContent =
+
+        "💡 Continue estudando! Revise o conteúdo e tente novamente para melhorar sua pontuação.";
+
+    }
+
+}
+
+
+
+/* =========================================
+   JOGAR NOVAMENTE
+========================================= */
+
+function restartQuiz() {
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    answered = false;
+
+
+    document
+        .getElementById("resultScreen")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("quizScreen")
+        .classList
+        .remove("hidden");
+
+
+    showQuestion();
+
+}
+
+</script>
+
+
+</body>
+
+</html>
